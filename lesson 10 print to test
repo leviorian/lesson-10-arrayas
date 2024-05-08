@@ -1,0 +1,267 @@
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Arrays;
+public class lesson10fromstart {
+
+//כתוב פונקציה המקבלת מערך מטיפוס int ואינדקס כלשהו, על הפונקציה לבדוק האם האינדקס בתחום המערך ולהדפיס הודעת ERROR אם לא במידה וכן על הפונקציה לבדוק האם ערך תא האינדקס זוגי ואם לא תשנה אותו למספר זוגי הקרוב לו.
+    public static void q1(int[] arr, int num) {
+        if (num >= 0 && num <= arr.length) {
+            if (arr[num] % 2 != 0) {
+                arr[num] += 1;
+            }
+            System.out.println("the index is between the boundries of the array");
+        } else {
+            System.out.println("ERROR!");
+        }
+    }
+
+//כתוב פונקציה המקבלת מערך של ציונים שלמים, הפונקציה תדפיס את הממומצע שלהם.
+    public static void q2(int[] arr) {
+        int sum_grades = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum_grades += arr[i];
+        }
+        sum_grades = sum_grades / arr.length;
+        System.out.println(sum_grades);
+    }
+
+//כתוב פונקציה המקבלת מערך ציונים של תלמיד הפונקציה תחזיר את הציון הנמוך ואת הגבוה ביותר
+    public static int q3(int[] arr) {
+        int Max_grade = 0;
+        int Min_grade = 100;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > Max_grade) {
+                Max_grade = arr[i];
+            }
+            if (arr[i] < Min_grade) {
+                Min_grade = arr[i];
+            }
+        }
+        System.out.println("the max grade is " + Max_grade);
+        System.out.println("the min grade is " + Min_grade);
+        return Max_grade;
+
+    }
+
+//כתוב פונקציה המקבלת מערך בין 10 מספרים שלמים, הפונקציה תדפיס זוגות של תאים עוקבים בעלי ערך אי זוגי, אם אין לא יודפס כלום
+    public static void q4(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] % 2 != 0 && arr[i + 1] % 2 != 0) {
+                System.out.println(i + "," + (i + 1));
+            }
+        }
+    }
+
+//כתוב פונקציה המקבלת מספר שלם 0-100 הפונקציה תקלוט 10 מספרים באופן אקראי 0-100 לתוך מערך ותחזיר תשובה בוליאנית האם המספר שהתקבל נמצא במערך האקראי
+    public static boolean q5(int num) {
+        int[] arr = new int[10];
+        boolean answer = false;
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            int random_num = random.nextInt(101);
+            arr[i] = random_num;
+            if (arr[i] == num) {
+                answer = true;
+                break;
+            }
+        }
+        System.out.println(answer);
+        return answer;
+    }
+//כתוב פונקציה הקולטת מערך מספרים אקראי בין 10 תווים הפונקציה תדפיס את התאים העוקבים שסכומם הוא זוגי
+    public static void q6() {
+        int[] arr = new int[10];
+        Random random = new Random();
+        for (int i = 0; i < arr.length - 1; i++) { // Adjusted loop condition
+            arr[i] = random.nextInt(101);
+            if ((arr[i] + arr[i + 1]) % 2 == 0) {
+                System.out.println(i + "," + (i + 1));
+            }
+        }
+    }
+//כתוב פונקציה הקולטת מערך מספרים אקראי בין 10 תאים, הפונקציה תדפיס את המערך כך שהמספר הגדול ביותר יהיה האחרון במערך.
+    public static void q7(){
+        int[] arr=new int[10];
+        Random random = new Random();
+        int max_num=0;
+        for(int i=0; i<arr.length;i++){
+            arr[i] = random.nextInt(101);
+            if (arr[i] > max_num){
+                max_num=arr[i];
+            }
+
+        }
+        arr[arr.length-1]=max_num;
+        System.out.println(Arrays.toString(arr));//הדפסת מערך
+    }
+//כתוב פונקציה המקבלת מערך שלמים הפונקציה תחזיר את מספר התא בו סכום ערכי התאים מצד ימין שלו שווים לסכום ערכי התאים מצד שמאל שלו
+    public static int q8(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int leftSum = 0, rightSum = 0;
+
+            for (int j = 0; j < i; j++) {
+                leftSum += arr[j];
+            }
+
+            for (int k = i + 1; k < arr.length; k++) {
+                rightSum += arr[k];
+            }
+
+            if (leftSum == rightSum) {
+                System.out.println(i);
+                return i;
+            }
+        }
+        System.out.println(-1);
+        return -1;
+    }
+//כתוב פונקציה המקבלת מערך של מחרוזות ותו כלשהו, הפונקציה תחזיר מהו סכום החזרות של התו המתקבל במערך
+    public static int q9(String[] arr1, char char1){
+        int times=0;
+        for(int i = 0; i < arr1.length; i++) { //לולאה ראשונה שעוברת על כמות האיברים במערך
+            for(int j = 0; j < arr1[i].length(); j++) {//לולאה שנייה שעוברת על כל תו בכל איבר במערך
+                if(arr1[i].charAt(j) == char1) {
+                    times+=1;
+                }
+            }
+        }
+        System.out.println(times);
+        return times;
+    }
+//כתוב פונקציה המקבלת מערך שלמים ומספר הפונקציה תחזיר את מספר התאים באם ערך התא גבוה מהמספר
+    public static void q10(int [] arr,int num){
+        for(int i=0; i< arr.length; i++){
+            if (arr[i] > num){
+                System.out.println(arr[i]);
+            }
+        }
+    }
+
+// כתוב פונקציה המקבלת מערך מטיפוס שלמים הפונקציה תחזיר את מספר האינדקס בו ערך התא השני בגודלו ביחס לכל ערכי התאים במערך
+    public static void q11(int[] arr) {
+        int max_num = 0;
+        int second_max_num = 0;
+        int max_index = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max_num) {
+                second_max_num = max_num;
+                max_num = arr[i];
+                max_index = i;
+            } else if (arr[i] > second_max_num && arr[i] != max_num) {
+                second_max_num = arr[i];
+            }
+        }System.out.println(max_index);
+    }
+
+    public static void q12(int[] array) {
+        System.out.println("Original array: " + Arrays.toString(array));
+
+        Random random = new Random();
+        int randomValue = random.nextInt(101);  // גורם למספר אקראי בין 0 ל-100
+        boolean found = false;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == randomValue) {
+                found = true;
+                // הזזת התאים שמאלה מהמקום שבו נמצא המספר
+                for (int j = i; j < array.length - 1; j++) {
+                    array[j] = array[j + 1];
+                }
+                array[array.length - 1] = 0;  // איפוס התא האחרון לאחר ההזזה
+                i--;  // עיבוד שוב של אותו מקום במקרה ויש מספרים כפולים
+            }
+        }
+
+        if (found) {
+            System.out.println("The number " + randomValue + " was found and removed.");
+        } else {
+            System.out.println("The number " + randomValue + " was not found.");
+        }
+
+        System.out.println("Modified array: " + Arrays.toString(array));
+    }
+
+//כתוב פונקציה הקולטת באופן אקראי מערך בין 30 מספרים שלמים בטווח 0 עד 10 הפונקציה תדפיס את כל המספרים המופיעים פעמיים בדיוק במערך
+    public static void q13() {
+        int[] numbers = new int[30];
+        int[] counts = new int[11]; // Array to count numbers from 0 to 10
+        Random random = new Random();
+
+// Fill the array with random numbers and count occurrences
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = random.nextInt(11);
+            counts[numbers[i]]++;
+        }
+
+// Print numbers that appear exactly twice
+        for (int i = 0; i < counts.length; i++) {
+            if (counts[i] == 2) {
+                System.out.println(i);
+            }
+        }
+    }
+
+//כתוב פונקציה הקולטת למערך 10 שלמים בין 0 ל100 באופן אקראי. הפונקציה תדפיס את המערך בסדר הקליטה לאחר מכן, תהפוך את סדר המערך (האיבר האחרון יהיה ראשון וכו') ותדפיס שוב כאשר הוא בסדר ההפוך
+    public static void q14() {
+        int[] array = new int[10];
+        Random random = new Random();
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(101);
+        }
+        for (int i=0; i<array.length; i++){
+            System.out.print(array[i]);
+            System.out.print(" ");
+        }
+
+        for (int i = 0; i < array.length / 2; i++) {
+            int tem = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = tem;
+        }
+        System.out.println("");
+
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {  // Check if it's not the last element to avoid a trailing space
+                System.out.print(" ");
+            }
+        }System.out.println();
+    }
+
+
+//כתוב פונקציה המקבלת מערך מטיפוס שלמים הפונקציה תחזיר תשובה בוליאנית האם המערך סימטרי
+    public static boolean q15(int[] array) {
+        int n = array.length;
+        for (int i = 0; i < n / 2; i++) {
+            if (array[i] != array[n - 1 - i]) {
+                System.out.println("False");
+                return false; // אם נמצא זוג שאינו תואם, המערך אינו סימטרי
+            }
+        }
+        System.out.println("True");
+        return true; // אם לא נמצאו זוגות שאינם תואמים, המערך סימטרי
+    }
+
+
+    public static void main(String [] args){
+        int arr [] = {1,2,3,4,5,6,7,8,9,10};
+        String arr1[] ={"aba", "saba","fgh","fvghj"};
+        q1(arr,3);
+        q2(arr);
+        q3(arr);
+        q4(arr);
+        q5(67);
+        q6();
+        q7();
+        q8(arr);
+        q9(arr1, 'a');
+        q10(arr,6);
+        q11(arr);
+        q12(arr);
+        q13();
+        q14();
+        q15(arr);
+
+    }
+}
